@@ -3,11 +3,15 @@ from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 from groq import Groq
 
-# Reads API key from Render's environment variables (set in Render dashboard)
-API_KEY = os.environ.get("GROQ_API_KEY", "gsk_your_key_here")
+# Reads API key from Render's environment variables
+API_KEY = os.environ.get("GROQ_API_KEY", "gsk_your_api_key")
 
 client = Groq(api_key=API_KEY)
-app = Flask(__name__, static_folder=".")
+
+# This fixes the "not found" error — tells Flask exactly where the files are
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+app = Flask(__name__, static_folder=BASE_DIR)
 CORS(app)
 
 SYSTEM_PROMPT = """You are RoadSOS Emergency Assistant, a location-based emergency chatbot for Chennai, India.
@@ -41,7 +45,7 @@ Chennai emergency reference:
 
 @app.route("/")
 def index():
-    return send_from_directory(".", "index.html")
+    return send_from_directory(BASE_DIR, "index.html")
 
 @app.route("/chat", methods=["POST"])
 def chat():
