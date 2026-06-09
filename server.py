@@ -4,7 +4,7 @@ from flask_cors import CORS
 from groq import Groq
 
 # Reads API key from Render's environment variables (set in Render dashboard)
-API_KEY = os.environ.get("GROQ_API_KEY", "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")
+API_KEY = os.environ.get("GROQ_API_KEY", "gsk_your_key_here")
 
 client = Groq(api_key=API_KEY)
 app = Flask(__name__, static_folder=".")
