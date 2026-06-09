@@ -105,5 +105,3 @@ http://localhost:5000
 Open Source — [Apache 2.0](LICENSE)
 
 ---
-
-*Built for Hackathon 2026 · Because every second matters.*
